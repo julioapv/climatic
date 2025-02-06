@@ -2,15 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="#" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/dist/styles.css" rel="stylesheet">
-    <title>Vite App</title>
+    <link rel="stylesheet" href="src/style.css">
+    <title>Climatic</title>
   </head>
-  <body>
-    <div id="app">
-      <h1>Climatic</h1>
-    </div>
+  <body class="bg-black-pearl text-mercury min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+      <header class="mb-8">
+          <h1 class="text-3xl font-bold">Climatic 🌤️</h1>
+          <p class="text-xl font-bold italic mb-4">Weather information at a glance</p>
+          <div class="flex">
+              <input type="text" placeholder="Enter location" class="flex-grow p-2 rounded-l-lg bg-big-stone text-mercury">
+              <button class="bg-fiord text-mercury px-4 py-2 rounded-r-lg hover:bg-bermuda-gray transition-colors">Search</button>
+          </div>
+      </header>
+
+      <main id="app">
+      </main>
+  </div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
