@@ -1,11 +1,15 @@
-export const DailyForecast = () => {
+// Iterate api information on each day
+
+export const DailyForecast = ({
+    date
+}) => {
     const section = document.createElement("section");
     section.innerHTML = `
               <section id="daily-forecast">
               <h2 class="text-2xl font-semibold mb-4">5-Day Forecast</h2>
               <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                   <div class="bg-big-stone rounded-lg p-4">
-                      <h3 class="font-semibold">Mon, Jun 5</h3>
+                      <h3 class="font-semibold">${date}</h3>
                       <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="Weather icon" class="w-12 h-12">
                       <p>High: 78°F</p>
                       <p>Low: 62°F</p>

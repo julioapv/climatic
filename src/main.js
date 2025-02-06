@@ -13,23 +13,27 @@ async function getResponse(city) {
         if (!response.ok) throw new Error("Failed to fetch data");
         const data = await response.json();
 
-        let cityName = data.adress;
-
         let currentWeatherInfo = {
             city: data.address,
             currentTemp: data.currentConditions.temp,
             feelsLike: data.currentConditions.feelslike,
             condition: data.currentConditions.conditions,
             icon: data.currentConditions.icon,
-            humidity: data.currentConditions.humidity
+            humidity: data.currentConditions.humidity,
+            windSpeed: data.currentConditions.windspeed,
+            sunrise: data.currentConditions.sunrise,
+            sunset: data.currentConditions.sunset
+        }
+    
+        let dailyForecastInfo = {
+            date: data.days[0].datetime
         }
 
-        console.log(cityName);
-        console.log(currentWeatherInfo.feelsLike);
-
+        console.log(dailyForecastInfo.date);
         
-    
-        appBody.appendChild(CurrentWeather(currentWeatherInfo.city));
+
+        appBody.appendChild(CurrentWeather(currentWeatherInfo));
+        appBody.appendChild(DailyForecast(dailyForecastInfo));
 
     
    }
@@ -38,7 +42,6 @@ async function getResponse(city) {
    }
 }
 // appBody.appendChild(CurrentWeather(data.address));
-appBody.appendChild(DailyForecast());
 
 
-getResponse("lyon")
+getResponse("Bergheim")
