@@ -1,11 +1,10 @@
 import './style.css'
 import { CurrentWeather } from './CurrentWeather';
 import { DailyForecast } from './DailyForecast';
-
 const appBody = document.querySelector("#app");
 
 
-async function getResponse(city) {
+async function getWeather(city) {
     try {
         const response = await fetch(
             `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=metric&key=DSFV7FNKTT4KEK5QWBJQXQTJR&contentType=json`
@@ -24,16 +23,21 @@ async function getResponse(city) {
             sunrise: data.currentConditions.sunrise,
             sunset: data.currentConditions.sunset
         }
-    
-        let dailyForecastInfo = {
-            date: data.days[0].datetime
-        }
 
-        console.log(dailyForecastInfo.date);
-        
+        const forecastArray = data.days.map(day => (
+            {
+                date: day.datetime,
+                maxTemp: day.tempmax,
+                minTemp: day.tempmin,
+                weatherCondition: day.conditions,
+                icon: day.icon,
+                precipProb: day.precipprob,
+                windSpeed: day.windspeed
+            }
+        ))
 
         appBody.appendChild(CurrentWeather(currentWeatherInfo));
-        appBody.appendChild(DailyForecast(dailyForecastInfo));
+        appBody.appendChild(DailyForecast(forecastArray));
 
     
    }
@@ -41,7 +45,5 @@ async function getResponse(city) {
        console.error(error)
    }
 }
-// appBody.appendChild(CurrentWeather(data.address));
 
-
-getResponse("Bergheim")
+getWeather("Lyon")
