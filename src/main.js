@@ -1,7 +1,27 @@
-import './style.css'
 import { CurrentWeather } from './CurrentWeather';
 import { DailyForecast } from './DailyForecast';
+import { ErrorDisplay } from './ErrorDisplay';
 const appBody = document.querySelector("#app");
+const locationInput = document.querySelector("#location-input");
+const searchQueryBtn = document.querySelector("#search-query-button");
+
+searchQueryBtn.addEventListener("click", () => {
+    if(!locationInput.value) {
+        return
+    }
+    cleanAppLayout()
+    getWeather(getUserQuery())
+})
+
+const getUserQuery = () => {
+    let searchQuery = locationInput.value;
+    locationInput.value = ""
+    return searchQuery
+}
+
+function cleanAppLayout() {
+    appBody.innerHTML = ""
+}
 
 
 async function getWeather(city) {
@@ -38,12 +58,11 @@ async function getWeather(city) {
 
         appBody.appendChild(CurrentWeather(currentWeatherInfo));
         appBody.appendChild(DailyForecast(forecastArray));
-
-    
    }
    catch(error) {
-       console.error(error)
+    //    console.error(error)
+       appBody.appendChild(ErrorDisplay())
    }
 }
 
-getWeather("Lyon")
+getWeather("Cologne")
