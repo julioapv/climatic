@@ -25,8 +25,8 @@ export const CurrentWeather = (
                     <p class="text-xl">Feels like: ${feelsLike}°C</p>
                     <p class="text-lg">${condition}</p>
                     <img src="${imgLink}" alt="icon ${icon} icon" class="w-16 h-16">
-                </div>
-                <div>
+                    </div>
+                <div class="md:text-xl md:flex md:flex-col md:gap-2 ">
                     <p>Humidity: ${humidity}%</p>
                     <p>Wind Speed: ${windSpeed} km/h</p>
                     <p>Sunrise: ${sunrise} AM</p>

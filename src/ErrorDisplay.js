@@ -1,6 +1,6 @@
 export const ErrorDisplay = () => {
     const errorContainer = document.createElement("div")
-    const classes = "bg-rose-900 rounded-lg p-10".split(' ')
+    const classes = "bg-rose-900 rounded-lg p-10".split(" ")
     errorContainer.classList.add(...classes)
 
     errorContainer.innerHTML = `
@@ -13,5 +13,5 @@ export const ErrorDisplay = () => {
     </ul>
     <p>If nothing of the aboved work please try again later or contact  <a href="https://github.com/julioapv" target="_blank" class="font-bold">support</a>  to get help</p>
     `
-        return errorContainer;
+    return errorContainer;
 }

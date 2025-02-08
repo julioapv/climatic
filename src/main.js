@@ -1,6 +1,8 @@
 import { CurrentWeather } from './CurrentWeather';
 import { DailyForecast } from './DailyForecast';
 import { ErrorDisplay } from './ErrorDisplay';
+import { LoadingScreen } from './LoadingScreen';
+
 const appBody = document.querySelector("#app");
 const locationInput = document.querySelector("#location-input");
 const searchQueryBtn = document.querySelector("#search-query-button");
@@ -25,6 +27,9 @@ function cleanAppLayout() {
 
 
 async function getWeather(city) {
+    const loadingElement = LoadingScreen();
+    appBody.appendChild(loadingElement);
+
     try {
         const response = await fetch(
             `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=metric&key=DSFV7FNKTT4KEK5QWBJQXQTJR&contentType=json`
@@ -32,6 +37,10 @@ async function getWeather(city) {
         if (!response.ok) throw new Error("Failed to fetch data");
         const data = await response.json();
 
+
+        loadingElement.remove();
+
+        
         let currentWeatherInfo = {
             city: data.address,
             currentTemp: data.currentConditions.temp,
@@ -55,14 +64,15 @@ async function getWeather(city) {
                 windSpeed: day.windspeed
             }
         ))
-
         appBody.appendChild(CurrentWeather(currentWeatherInfo));
         appBody.appendChild(DailyForecast(forecastArray));
-   }
+
+    }
    catch(error) {
-    //    console.error(error)
-       appBody.appendChild(ErrorDisplay())
-   }
+        console.error(error)
+        appBody.appendChild(ErrorDisplay())
+        loadingElement.remove();
+    }
 }
 
 getWeather("Cologne")
